@@ -110,7 +110,9 @@ var CommentsView = Backbone.View.extend({
     /* Render each model in the collection as a list item (<li>).
      * Remember, we have the underscore functions: */
     this.$el.find('ul').append(this.collection.map(function(comment) {
-      // YOUR CODE HERE
+      console.dir(comment);     
+      return $('<li></li>').append(comment.get("message") + " votes: " + comment.get("votes"));  
+
     }));
 
     return this.$el;
@@ -134,7 +136,18 @@ var comments = new Comments(commentList);
 var commentsView = new CommentsView({ collection: comments });
 
 // Append it to the page (uncomment this when you are ready):
-// $('body').append(commentsView.render());
+
+var comment = new Comment("CB", 1000000);
+var commentView = new CommentView({model:comment}); 
+
+comments.add(comment); 
+
+
+$('body').append(commentView.render());
+$('body').append(commentsView.render());
+//$('.test').append(commentsView.render());
     </script>
+<div class="test"></div>
+
   </body>
 </html>
